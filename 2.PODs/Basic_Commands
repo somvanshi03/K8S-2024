@@ -11,8 +11,8 @@ Check Pods:
 Kubernetes YAML Basics:
 --------------------------
 	> kubectl explain pods	 --recursive	| more
-	> kubectl explain deployment
-	> kubectl explain deployment --recursive
+	> kubectl explain pods
+	> kubectl explain pods --recursive
 
 apiVersions: [ v1 | apps/v1 ]
 Kind: [ Pod | Deployment | Service | PersistentVolume ]
