@@ -1,0 +1,16 @@
+Deployments:
+------------
+
+A Deployment object acts as a supervisor for pods, giving you fine-grained control over how and when a new pod is rolled out, updated or rolled back to a previous state.
+
+
+	> kubectl create -f deploy.yml
+	> kubectl get all
+	> kubectl get deploy
+	> kubectl get rs
+	> kubectl rollout status deployment devopshangout
+	> kubectl rollout history  deployment devopshangout
+	> kubectl rollout history  deployment devopshangout --revision=1
+	> kubectl rollout undo  deployment devopshangout --to-revision=2
+	> kubectl rollout undo  deployment devopshangout --to-revision=3
+	> kubectl autoscale deployment devopshangout --min=5 --max=15 --cpu-percent=80
