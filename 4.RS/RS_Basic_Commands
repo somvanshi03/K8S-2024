@@ -1,0 +1,14 @@
+ReplicaSet:
+-----------
+
+Next generation of ReplicaController
+The replication contoller only supports equality-based selector whereas the replica set supports set-based selector.
+
+kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
+kubectl run nginx-uat --labels="app=uat" --image=nginx:1.7.1
+kubectl run nginx-dev --labels="app=dev" --image=nginx:1.7.1
+
+
+	> kubectl create -f rs.yml
+	> kubectl get all
+	> kubectl delete rs --cascade=false nginx
