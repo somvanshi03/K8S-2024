@@ -1,0 +1,11 @@
+Services:
+---------
+
+ClusterIP:
+----------
+	
+	> Expose VIP only reachable from within the cluster.
+	> Mainly used to communicate between components of microservices.
+	
+kubectl create -f ClusterIP.yml
+kubectl get svc
