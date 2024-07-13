@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-test
+  labels:
+	 env: Development
+	 app: Dotnet
+spec:
+  containers:
+  - name: nginx-test
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+  nodeSelector:
+	hardware: t2-medium
+	disktype: ssd	
+	hostname: k-w

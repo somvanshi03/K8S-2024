@@ -1,0 +1,14 @@
+Scaling and Replication:
+------------------------
+ReplicationContoller:
+---------------------
+
+Kubernetes was designed to orchestrate multiple container and replication.
+
+
+	> kubectl create -f myrc.yml
+	> kubectl get rc
+	> kubectl describe rc myrc
+	> kubectl get all
+	> kubectl get pods
+	> kubectl scale --replicas=4 rc -l app=nginx
