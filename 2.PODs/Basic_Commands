@@ -1,0 +1,87 @@
+Check Pods:
+------------
+
+	> kubectl get pods
+	> kubectl get pods -o wide
+	> kubectl get pods --all-namespaces
+	> kubectl get pods --all-namespaces -o wide
+	> kubectl get pods -A 
+
+
+Kubernetes YAML Basics:
+--------------------------
+	> kubectl explain pods	 --recursive	| more
+	> kubectl explain deployment
+	> kubectl explain deployment --recursive
+
+apiVersions: [ v1 | apps/v1 ]
+Kind: [ Pod | Deployment | Service | PersistentVolume ]
+metadata:
+	name: <Value>
+	label: <Value>
+spec:
+	containers:
+		name: <Value>
+		image: <Value>
+		command: <Value>
+		workingDir: <Value>
+		ports: <Value>
+		env: <Value>
+		resources: <Value>
+		volumeMounts: <Value>
+		livenessProbe: <Value>
+		readinessProbe: <Value>
+restartPolicy: Never	# Defaults to Always.
+		
+		
+------------------------------------------------------
+https://kubernetes.io/docs/concepts/workloads/pods/ 
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+https://www.bluematador.com/learn/kubectl-cheatsheet
+https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create
+
+
+Create Pod:
+------------
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-test
+spec:
+  containers:
+  - name: nginx-test
+    image: nginx:1.14.2
+    ports:
+    - containerPort: 80
+	
+
+	> kubectl create -f POD.yaml	# for the first time.
+	> kubectl apply -f POD.yaml	# during updating pods
+	> kubectl explain pods	 --recursive	| more
+	> kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
+
+	
+Get Pods Details:
+------------------
+
+	> kubectl get pods
+	> kubectl get pods -o wide
+	> kubectl get nodes -o yaml
+	> kubectl get pods --all-namespaces
+	> kubectl describe <pod_Name>
+	> kubectl exec -it <pod_Name> /bin/bash
+
+Get Pod logs :
+---------------
+
+	> kubectl logs <pod_Name>
+	> kubectl logs -f <pod_Name> -c <continer_name>
+
+	
+Delete Pods:
+-------------
+
+	> kubectl delete pod <pod_Name>
+	> kubectl get pods
