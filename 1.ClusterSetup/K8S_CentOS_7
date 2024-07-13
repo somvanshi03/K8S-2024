@@ -1,0 +1,54 @@
+
+Install Docker on Centos7:
+--------------------------
+
+https://docs.docker.com/engine/install/centos/
+
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+or try below one
+
+sudo yum install docker -y 
+sudo systemctl start docker
+sudo systemctl enable docker
+
+
+Install K8S on Centos7:
+-----------------------
+
+https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/
+
+
+sudo setenforce 0
+sudo sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+
+cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
+
+sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+sudo systemctl enable kubelet
+sudo systemctl start kubelet
+sudo systemctl status kubelet
+sudo systemctl restart kubelet
+
+Note: Pls disable firewalld 
+
+systemctl stop firewalld 
+systemctl disable firewalld
+
+kubeadm init  --pod-network-cidr=192.168.0.0/16
+
+https://docs.tigera.io/calico/latest/getting-started/kubernetes/quickstart
+
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.0/manifests/custom-resources.yaml
+watch kubectl get pods -n calico-system
