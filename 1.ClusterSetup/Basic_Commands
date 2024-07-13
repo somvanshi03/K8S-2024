@@ -1,0 +1,28 @@
+Check Kubernetes Version:
+---------------------------
+
+> kubectl version
+> kubectl version --client
+
+
+Check Node List and version:
+------------------------------
+
+> kubectl get nodes
+> kubectl get nodes -o wide
+> kubectl cluster-info
+> kubectl api-versions
+
+> kubectl describe node <nodeIP _ or name>
+	
+Configuration file location:
+---------------------------
+
+> cd /etc/kubernetes/
+> cd /etc/kubernetes/manifests/
+
+Reset Cluster:
+--------------
+
+> sudo kubeadm reset
+> sudo kubeadm init
