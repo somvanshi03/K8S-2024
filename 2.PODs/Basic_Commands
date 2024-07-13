@@ -43,20 +43,7 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create
 
 Create Pod:
 ------------
-
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: nginx-test
-spec:
-  containers:
-  - name: nginx-test
-    image: nginx:1.14.2
-    ports:
-    - containerPort: 80
 	
-
 	> kubectl create -f POD.yaml	# for the first time.
 	> kubectl apply -f POD.yaml	# during updating pods
 	> kubectl explain pods	 --recursive	| more
