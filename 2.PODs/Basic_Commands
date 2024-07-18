@@ -59,11 +59,10 @@ Create Pod:
 	
 	> kubectl exec -it myfirst-pod -- /bin/bash
 
+	> kubectl run myfirst-pod --image=nginx --dry-run=client
+	> kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
 
-kubectl run myfirst-pod --image=nginx --dry-run=client
-kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
-
-kubectl exec -it myfirst-pod -- /bin/bash
+	> kubectl exec -it myfirst-pod -- /bin/bash
 	
 Get Pods Details:
 ------------------
@@ -72,6 +71,7 @@ Get Pods Details:
 	> kubectl get pods -o wide
 	> kubectl get nodes -o yaml
 	> kubectl get pods --all-namespaces
+	> kubectl get pods -A
 	> kubectl describe <pod_Name>
 	> kubectl exec -it <pod_Name> /bin/bash
 

@@ -1,0 +1,27 @@
+How to update cluster
+========================================================================
+kubeadm upgrade plan 
+It will show you the list all available updated and current verisons
+
+yum list --showduplicates kubeadm --disableexcludes=kubernetes
+# find the latest 1.26 version in the list
+
+yum install -y kubeadm-'1.30.3-150500.1.1' --disableexcludes=Kubernetes
+run the above command for the update change the version as per requirement
+
+you will get the following message 
+
+upgraded:
+  kubeadm-1.30.3-150500.1.1.x86_64                                                                                                                                                           
+
+
+run the command will you the pending updates
+kubeadm upgrade plan
+
+In the last update your cluster with following command
+kubeadm upgrade apply v1.30.3 (It will take upto 5 min)
+================================================================================
+
+for the Worker node you should run the drain command to move all your pods to another node
+kubectl drain <node-to-drain> --ignore-daemonsets
+=======================================================================================
