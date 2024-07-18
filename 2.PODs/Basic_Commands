@@ -56,8 +56,6 @@ Create Pod:
 	> kubectl run myfirst-pod --image=nginx --dry-run=client
 	> kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
 	> kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
-	
-	> kubectl exec -it myfirst-pod -- /bin/bash
 
 	> kubectl run myfirst-pod --image=nginx --dry-run=client
 	> kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
