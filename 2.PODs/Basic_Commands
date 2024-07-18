@@ -44,11 +44,26 @@ https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#create
 Create Pod:
 ------------
 	
+	> kubectl --help
 	> kubectl create -f POD.yaml	# for the first time.
 	> kubectl apply -f POD.yaml	# during updating pods
 	> kubectl explain pods	 --recursive	| more
-	> kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
 
+	> kubectl run --help	
+	> kubectl run myfirst-pod --image=nginx
+	> kubectl get pod -o yaml
+
+	> kubectl run myfirst-pod --image=nginx --dry-run=client
+	> kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
+	> kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
+	
+	> kubectl exec -it myfirst-pod -- /bin/bash
+
+
+kubectl run myfirst-pod --image=nginx --dry-run=client
+kubectl run myfirst-pod --image=nginx --dry-run=client -o yaml
+
+kubectl exec -it myfirst-pod -- /bin/bash
 	
 Get Pods Details:
 ------------------
