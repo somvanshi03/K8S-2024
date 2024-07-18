@@ -1,0 +1,29 @@
+ErrImagePull
+
+"ErrImagePull" is an error that typically occurs in Kubernetes when there is an issue pulling a container image from a container registry. Here are some common causes and solutions for this error:
+
+1. **Image Not Found**: The specified image does not exist in the registry.
+   - **Solution**: Verify the image name, tag, and registry URL.
+
+2. **Authentication Issues**: Lack of proper authentication credentials to access the image in a private registry.
+   - **Solution**: Make sure you have created and correctly configured a Kubernetes secret for the registry credentials.
+
+3. **Network Issues**: Problems with network connectivity to the container registry.
+   - **Solution**: Ensure your nodes can reach the container registry over the network. Check firewall settings and DNS configuration.
+
+4. **Image Pull Policy**: Misconfigured image pull policy.
+   - **Solution**: Ensure the `imagePullPolicy` is set correctly (`Always`, `IfNotPresent`, `Never`). For example, if you want to pull the latest image on each deployment, use `Always`.
+
+5. **Registry Rate Limiting**: The registry might be limiting the rate of image pulls.
+   - **Solution**: Check the registry's rate limiting policies. If hitting Docker Hub limits, consider using a mirror or increasing the limits with a Docker Hub subscription.
+
+6. **Incorrect Image Path**: The image path is not correctly specified.
+   - **Solution**: Verify the image path format is correct (e.g., `registry/path/to/image:tag`).
+
+To troubleshoot this error, you can describe the pod to get more details about the error:
+
+```sh
+kubectl describe pod <pod-name>
+```
+
+Look for events under the pod description for more specific information about why the image pull failed.
