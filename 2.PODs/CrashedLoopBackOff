@@ -1,0 +1,61 @@
+CrashedLoopBackOff
+
+
+"CrashedLoopBackOff" is a common error in Kubernetes, indicating that a pod is in a crash loop, continually restarting due to repeated failures. This state often arises when the application inside the pod fails to start or crashes shortly after starting. Here's a step-by-step guide to diagnose and potentially resolve the issue:
+
+1. **Check Pod Status**:
+   Run the following command to get details about the pod:
+   ```sh
+   kubectl get pods
+   ```
+
+2. **Describe the Pod**:
+   Get detailed information about the pod, including recent events:
+   ```sh
+   kubectl describe pod <pod-name>
+   ```
+   Look for any error messages or unusual events that might indicate the cause of the crash.
+
+3. **Check Pod Logs**:
+   View the logs of the container within the pod to identify any application-specific errors:
+   ```sh
+   kubectl logs <pod-name> -c <container-name>
+   ```
+   If the pod has multiple containers, specify the container name.
+
+4. **Inspect Init Containers**:
+   If your pod uses init containers, check their status and logs as well:
+   ```sh
+   kubectl get pod <pod-name> -o jsonpath='{.status.initContainerStatuses[*].state}' | jq
+   kubectl logs <pod-name> -c <init-container-name>
+   ```
+
+5. **Check Resource Limits**:
+   Ensure that your pod has enough CPU and memory resources allocated. Adjust the resource requests and limits if necessary.
+
+6. **Check Configuration and Environment Variables**:
+   Verify that all necessary configuration files, secrets, and environment variables are correctly set up.
+
+7. **Inspect Events and Node Status**:
+   Sometimes the issue might be with the node itself. Check the node status and events for any indications of underlying problems:
+   ```sh
+   kubectl get events
+   kubectl describe node <node-name>
+   ```
+
+8. **Review Deployment Strategy**:
+   If the pod is part of a Deployment, StatefulSet, or DaemonSet, check the deployment strategy and ensure it's correctly configured.
+
+9. **Check for Image Issues**:
+   Verify that the container image is correctly built and accessible. Ensure there are no issues with image pulling:
+   ```sh
+   kubectl describe pod <pod-name> | grep -i image
+   ```
+
+10. **Debug with `kubectl exec`**:
+    If the container stays up long enough, you can exec into it to inspect the runtime environment:
+    ```sh
+    kubectl exec -it <pod-name> -- /bin/sh
+    ```
+
+By systematically going through these steps, you should be able to identify and resolve the cause of the `CrashedLoopBackOff` error.
