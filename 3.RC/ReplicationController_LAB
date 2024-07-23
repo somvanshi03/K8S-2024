@@ -1,0 +1,10 @@
+ReplicaController LAB:
+
+	> kubectl create rc.yaml
+	> kubectl get all
+
+	> kubectl scale rc nginx-controller --replicas=5
+    
+	Note: Edit ReplicaController file and try to update Image version.
+		  We can scale no of PODs but can not rollout and rollback image version.
+		  

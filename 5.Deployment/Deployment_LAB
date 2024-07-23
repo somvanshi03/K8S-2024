@@ -1,0 +1,10 @@
+Deployment LAB:
+---------------
+
+Command Method:
+---------------
+
+	> kubectl create deployment -h 
+	> kubectl create deployment my-deployment --image=nginx
+	> kubectl create deployment my-deployment --image=nginx --port=80  --replicas=5
+	> kubectl get deploy 

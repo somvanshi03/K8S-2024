@@ -1,0 +1,14 @@
+ReplicaSet LAB:
+---------------			
+			
+	> kubectl run nginx-prod --labels="app=prod" --image=nginx:1.7.1
+	> kubectl run nginx-uat --labels="app=uat" --image=nginx:1.7.1
+	> kubectl run nginx-dev --labels="app=dev" --image=nginx:1.7.1
+
+	> kubectl get pod  --show-labels
+	> kubectl create -f rs.yaml
+	> kubectl scale replicaset nginx --replicas=10
+	> kubectl get pod  --show-labels
+	>  kubectl delete rs --cascade=orphan nginx 
+	> kubectl get pods
+	> 

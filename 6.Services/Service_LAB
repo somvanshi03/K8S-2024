@@ -1,0 +1,9 @@
+Service LAB:
+------------
+
+	> kubectl expose deployment my-deployment --type=ClusterIP --name=my-service
+	> kubectl expose deployment my-deployment --type=NodePort --name=my-service
+	> kubectl expose deployment my-deployment --type=LoadBalancer --name=my-service
+	
+	Note: Type for this service: ClusterIP, NodePort, LoadBalancer, or ExternalName. Default is 'ClusterIP'.
+	
