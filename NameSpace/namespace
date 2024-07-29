@@ -1,0 +1,101 @@
+NameSpace:
+----------
+
+check NameSpace:
+----------------
+
+	> kubectl get ns
+
+Create NameSpace:
+-----------------
+
+	> kubectl create ns dev
+	> kubectl create ns uat
+	> kubectl create ns prod
+	> kubectl get ns -o wide
+	
+Find your current context:
+--------------------------
+
+	> kubectl config current-context
+	
+Set the default namespace for the current context:
+--------------------------------------------------
+
+	> kubectl config set-context --current --namespace=your-namespace
+	> kubectl config set-context --current --namespace=dev
+	> kubectl config view --minify | grep namespace:
+
+Set Quota on dev namespace:
+---------------------------
+https://kubernetes.io/docs/concepts/policy/resource-quotas/
+
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: example-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "5"                       # Maximum number of pods
+    requests.cpu: "1"                # Total CPU requests
+    requests.memory: "1Gi"           # Total memory requests
+    limits.cpu: "2"                  # Total CPU limits
+    limits.memory: "2Gi"            # Total memory limits
+    configmaps: "5"                 # Maximum number of ConfigMaps
+    services: "5"                    # Maximum number of services
+    secrets: "5"                    # Maximum number of secrets
+    persistentvolumeclaims: "5"     # Maximum number of persistent volume claims
+    persistentvolumes: "5"          # Maximum number of persistent volumes (optional, usually managed by the cluster)
+
+
+kubectl create -f requestsqouta.yaml
+
+kubectl get resourcequotas
+kubectl get resourcequotas -n dev
+
+kubectl describe resourcequotas -n dev
+
+
+Create POD in dev namespace:
+----------------------------
+	> kubectl run devpod --image=nginx:1.7.1 -n dev
+	
+	> kubectl describe resourcequotas -n dev
+	
+	> kubectl run devpod1 --image=nginx:1.7.1 -n dev
+	
+	> kubectl describe resourcequotas -n dev
+
+Note: Try to create more than 5 Pod. and descrease qouta limit to 4 and then see what happens to existing 5 Pods - Without CPU and Memory
+      Try to create Pod with CPU and Memory limits
+
+
+Set LimitRange in NameSpace:
+----------------------------
+
+
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: dev-limits
+  namespace: dev
+spec:
+  limits:
+  - default:
+      cpu: "500m"
+      memory: "500Mi"
+    defaultRequest:
+      cpu: "250m"
+      memory: "128Mi"
+    max:
+      cpu: "1"
+      memory: "500Mi"
+    min:
+      cpu: "100m"
+      memory: "64Mi"
+    type: Container
+
+Note: Now create command line pod in Prod ns. now it will take it from your limits.
+

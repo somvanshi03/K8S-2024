@@ -1,9 +1,64 @@
 Service LAB:
 ------------
+Types:
+------
+1. ClusterIP	> Works in round robin method. and accessible withn K8S cluster
+2. Headless		> Mostly works on Databse kind of service. and it is also accessible withn the K8S Cluster
+3. NodePort		> Mostly works on Frontend application. and it is accessible outside of K8S cluster  with specific port no.
+4. LoadBalancer
+5. ExternalName:
 
-	> kubectl expose deployment my-deployment --type=ClusterIP --name=my-service
-	> kubectl expose deployment my-deployment --type=NodePort --name=my-service
-	> kubectl expose deployment my-deployment --type=LoadBalancer --name=my-service
+Service IP range:
+-----------------
+
+cd /etc/kubernetes/menifest/
+vi kube-apiservice
+
+
+
+
+Cluster IP:
+-----------
+
+	> kubectl expose deployment nginx-deployment --type=ClusterIP --name=nginx-deployment --port=80 --target-port=80
+	> kubectl create deployment nginx-deployment --image=nginx:latest
+	> kubectl scale deployment nginx-deployment --replicas=3
+
+
+
+NodePort:
+---------
+	> kubectl expose deployment nginx-deployment --type=NodePort --port=80 --target-port=80 --name=nginx-nodeport
+	> kubectl create deployment nginx-deployment --image=nginx:latest
+	> kubectl scale deployment nginx-deployment --replicas=3
 	
-	Note: Type for this service: ClusterIP, NodePort, LoadBalancer, or ExternalName. Default is 'ClusterIP'.
 	
+LoadBalancer:
+-------------
+
+	> kubectl expose deployment nginx-deployment --type=LoadBalancer --name=nginx-deployment --port=80 --target-port=80
+	> kubectl create deployment nginx-deployment --image=nginx:latest
+	> kubectl scale deployment nginx-deployment --replicas=3
+
+Note: Type for this service: ClusterIP, NodePort, LoadBalancer, or ExternalName. Default is 'ClusterIP'.
+	
+
+ExternalName:  https://medium.com/@ManagedKube/kubernetes-access-external-services-e4fd643e5097
+
+#############
+
+init container:
+---------------
+
+A Pod can have multiple containers running apps within it, but it can also have one or more init containers, which are run before the app containers are started.
+
+init containers are exactly like regular containers, except:
+
+Init containers always run to completion.
+Each init container must complete successfully before the next one starts.
+
+If a Pod's init container fails, the kubelet repeatedly restarts that init container until it succeeds. However, if the Pod has a restartPolicy of Never, and an init container fails during startup of that Pod, Kubernetes treats the overall Pod as failed.
+
+
+https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+
