@@ -1,0 +1,13 @@
+########  PV   #############
+	
+kubectl create -f mypv.yaml
+kubectl get pv
+kubectl describe pv myebspv -o wide
+
+####### PVC  ###############
+  
+kubectl create -f mypvc.yaml
+kubectl get pvc -o wide
+kubectl describe pvc myebsvolclaim
+
+

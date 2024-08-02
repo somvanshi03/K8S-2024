@@ -1,0 +1,21 @@
+
+###########  EmptyDir   #############
+
+
+Go inside container 1 and creae some file and check in sencond container if data is available in second container or not.
+
+kubectl exec -it emptyDirvol -c c1 -- /bin/bash
+
+kubectl exec -it emptyDirvol -c c2 -- /bin/bash
+
+########  PV   #############
+	
+kubectl create -f mypv.yaml
+kubectl get pv
+kubectl describe pv myebspv -o wide
+
+####### PVC  ###############
+  
+kubectl create -f mypvc.yaml
+kubectl get pvc -o wide
+kubectl describe pvc myebsvolclaim

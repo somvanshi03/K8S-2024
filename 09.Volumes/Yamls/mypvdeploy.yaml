@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvdeploy
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: mypv
+  template:
+    metadata:
+      labels:
+        app: mypv
+    spec:
+      containers:
+        - name: DevOpsHangout
+          image: nginx:1.7.9
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: mypd
+              mountPath: /tmp/persistent
+          volumes:
+            - name: mypd
+              persistentVolumeClaim: null
+              claimName: myebsvolclaim

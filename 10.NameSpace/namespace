@@ -26,10 +26,14 @@ Set the default namespace for the current context:
 	> kubectl config set-context --current --namespace=dev
 	> kubectl config view --minify | grep namespace:
 
+	> Try to create POD in Dev namespace and check status
+	
+	
 Set Quota on dev namespace:
 ---------------------------
 https://kubernetes.io/docs/concepts/policy/resource-quotas/
 
+> First Remove CPU and memory parameter and do the LAB.
 
 apiVersion: v1
 kind: ResourceQuota
@@ -60,7 +64,7 @@ kubectl describe resourcequotas -n dev
 
 Create POD in dev namespace:
 ----------------------------
-	> kubectl run devpod --image=nginx:1.7.1 -n dev
+	> kubectl run devpod --image=nginx:1.7.1 -n dev  
 	
 	> kubectl describe resourcequotas -n dev
 	
@@ -98,4 +102,3 @@ spec:
     type: Container
 
 Note: Now create command line pod in Prod ns. now it will take it from your limits.
-
