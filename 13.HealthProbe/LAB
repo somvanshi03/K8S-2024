@@ -1,0 +1,1 @@
+kubectl expose deployment example-deployment --type=ClusterIP --name=example-deployment --port=80 --target-port=80
