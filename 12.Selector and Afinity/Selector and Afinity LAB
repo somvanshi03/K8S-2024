@@ -1,0 +1,31 @@
+
+Selector, Node Afinity and Anti Afinity, POD Afinity and POD Anti Afinity:
+--------------------------------------------------------------------------
+
+Node Selector:
+--------------
+
+Means you have to mention where you need to run your deployment. you have to provide anyone server like SSD/OS/Tag etc.
+
+Add lebel on worker node.
+
+
+	> kubectl label nodes <node-name> disktype=ssd
+	> kubectl label nodes <node-name> app=prod
+
+
+Node Afinity:
+-------------
+Means you have to mention you want to run app anywhere. It will match the affinity rule.
+
+kubectl label nodes <node-name-1> disktype=ssd
+kubectl label nodes <node-name-2> disktype=hdd
+
+
+Node Anti Afinity:
+------------------
+
+Means you have to mention where exactly you want to run exeept all node.
+
+kubectl label nodes <node-name-1> zone=us-west
+kubectl label nodes <node-name-2> zone=us-east

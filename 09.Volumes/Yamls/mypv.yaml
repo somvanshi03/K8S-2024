@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -9,5 +10,5 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Recycle
   awsElasticBlockStore:
-    volumeID: vol-12345678  # Replace with your actual volume ID
-	fsType: ext4
+    volumeID: vol-0c37922c4c209b3bd
+    fsType: ext4

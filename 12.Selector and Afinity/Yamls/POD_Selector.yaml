@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: example-pod
+spec:
+  nodeSelector:
+    disktype: ssd
+	app:prod
+  containers:
+  - name: example-container
+    image: nginx

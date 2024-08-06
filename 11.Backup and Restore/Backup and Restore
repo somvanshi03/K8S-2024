@@ -1,0 +1,24 @@
+Backup and Restore:
+-------------------
+
+kubectl get pods -A -o yaml > hdfcproject.yaml
+
+describe etcd 
+
+kubectl describe pod etcd-k-m -n kube-system
+
+to take a backup,
+cd /var/lib/etcd/
+and take backup of member dir
+
+
+Backup 
+
+etcdctl snaphot save --endpoint=127.0.0.1:2379 --cacert=/etc/kubernetes/pki/etcd/ca.crt --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key /tmp/etcd.db
+
+
+Restore:
+
+etcdctl snapshot restore --data-dir /var/lib/etcd-backup /tmp/etcd.db
+
+kubectl restart kubelet
