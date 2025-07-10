@@ -204,5 +204,5 @@
 
 	kubectl create secret docker-registory mridul08secret --docker-server=https://index.docker.io/v1/ --docker-username=XXXXXXX -docker-password=XXXXXX --docker-email=XXXXXX@gmail.com
 
-	> kubectl get secret	
+	kubectl get secret	
  
